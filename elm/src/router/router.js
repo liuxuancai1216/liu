@@ -4,7 +4,7 @@ const home = r => require.ensure([], () => r(require('../page/home/home')), 'hom
 const city = r => require.ensure([], () => r(require('../page/city/city')), 'city')
 const profile = r => require.ensure([], () => r(require('../page/profile/profile')), 'profile')
 const login = r => require.ensure([], () => r(require('../page/login/login')), 'login')
-
+const info = r => require.ensure([], () => r(require('../page/profile/children/info')), 'info')
 
 export default [{
     path: '/',
@@ -31,7 +31,11 @@ export default [{
         },
         {
             path: '/profile',
-            component: profile
+            component: profile,
+            children:[{
+                path: 'info', //个人信息详情页
+                component: info,
+            }]
         },
     ]
 }]
