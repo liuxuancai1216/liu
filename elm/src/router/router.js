@@ -9,6 +9,13 @@ const login = r => require.ensure([], () => r(require('../page/login/login')), '
 const info = r => require.ensure([], () => r(require('../page/profile/children/info')), 'info')
 const setusername = r => require.ensure([], () => r(require('../page/profile/children/children/setusername')), 'setusername')
 const address = r => require.ensure([], () => r(require('../page/profile/children/children/address')), 'address')
+const shop = r => require.ensure([], () => r(require('../page/shop/shop')), 'shop')
+const foodDetail = r => require.ensure([], () => r(require('../page/shop/children/foodDetail')), 'foodDetail')
+const shopDetail = r => require.ensure([], () => r(require('../page/shop/children/shopDetail')), 'shopDetail')
+const shopSafe = r => require.ensure([], () => r(require('../page/shop/children/children/shopSafe')), 'shopSafe')
+const food = r => require.ensure([], () => r(require('../page/food/food')), 'food')
+const confirmOrder =r => require.ensure([],() => r(require('../page/confirmOrder/confirmOrder')), 'confirmOrder')
+const chooseAddress = r => require.ensure([], () => r(require('../page/confirmOrder/children/chooseAddress')), 'chooseAddress')
 export default [{
     path: '/',
     component: App, //顶层路由，对应index.html
@@ -34,6 +41,11 @@ export default [{
             component: msite,
             meta: { keepAlive: true },
         },
+        //特色商铺列表页
+        {
+            path: '/food',
+            component: food
+        },
          //搜索页
          {
             path: '/search/:geohash',
@@ -44,6 +56,23 @@ export default [{
             path: '/login',
             component: login
         },
+         //商铺详情页
+         {
+            path: '/shop',
+            component: shop,
+            children: [{
+                path: 'foodDetail', //食品详情页
+                component: foodDetail,
+            }, {
+                path: 'shopDetail', //商铺详情页
+                component: shopDetail,
+                children: [{
+                    path: 'shopSafe', //商铺安全认证页
+                    component: shopSafe,
+                }, ]
+            }]
+        },
+        //个人信息页
         {
             path: '/profile',
             component: profile,
@@ -59,5 +88,14 @@ export default [{
                 }]
             }]
         },
+         //确认订单页
+         {
+            path: '/confirmOrder',
+            component: confirmOrder,
+            children:[{
+                path: 'chooseAddress', //选择地址
+                component: chooseAddress, 
+            }]
+         },
     ]
 }]
