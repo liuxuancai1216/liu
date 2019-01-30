@@ -16,6 +16,14 @@ const shopSafe = r => require.ensure([], () => r(require('../page/shop/children/
 const food = r => require.ensure([], () => r(require('../page/food/food')), 'food')
 const confirmOrder =r => require.ensure([],() => r(require('../page/confirmOrder/confirmOrder')), 'confirmOrder')
 const chooseAddress = r => require.ensure([], () => r(require('../page/confirmOrder/children/chooseAddress')), 'chooseAddress')
+const order = r => require.ensure([], () => r(require('../page/order/order')), 'order')
+const orderDetail = r => require.ensure([], () => r(require('../page/order/children/orderDetail')), 'orderDetail')
+const vipcard = r => require.ensure([], () => r(require('../page/vipcard/vipcard')), 'vipcard')
+const invoiceRecord = r => require.ensure([], () => r(require('../page/vipcard/children/invoiceRecord')), 'invoiceRecord')
+const useCart = r => require.ensure([], () => r(require('../page/vipcard/children/useCart')), 'useCart')
+const vipDescription = r => require.ensure([], () => r(require('../page/vipcard/children/vipDescription')), 'vipDescription')
+const service = r => require.ensure([], () => r(require('../page/service/service')), 'service')
+const questionDetail = r => require.ensure([], () => r(require('../page/service/children/questionDetail')), 'questionDetail')
 export default [{
     path: '/',
     component: App, //顶层路由，对应index.html
@@ -97,5 +105,39 @@ export default [{
                 component: chooseAddress, 
             }]
          },
+          //订单列表页
+        {
+            path: '/order',
+            component: order,
+            children: [{
+                path: 'orderDetail', //订单详情页
+                component: orderDetail,
+            
+            }, ]
+        },
+         //vip卡页
+         {
+            path: '/vipcard',
+            component: vipcard,
+            children: [{
+                path: 'invoiceRecord', //开发票
+                component: invoiceRecord,
+            }, {
+                path: 'useCart', //购买会员卡
+                component: useCart,
+            }, {
+                path: 'vipDescription', //会员说明
+                component: vipDescription,
+            },]
+        },
+        //服务中心
+        {
+            path: '/service',
+            component: service,
+             children: [{
+                path: 'questionDetail', //订单详情页
+                component: questionDetail,
+            }, ]
+        },
     ]
 }]

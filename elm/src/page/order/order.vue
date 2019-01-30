@@ -151,12 +151,11 @@
                 payWayId: 1, //付款方式
                 showAlert: false, //弹出框
                 alertText: null, //弹出框内容
-                
+                id:""
             }
         },
         created(){
             //获取上个页面传递过来的geohash值
-            console.log(this.$route)
             this.geohash = this.$route.query.geohash;
             //获取上个页面传递过来的shopid值
             this.shopId = this.$route.query.shopId;
@@ -210,7 +209,6 @@
                 Object.values(this.shopCart).forEach(categoryItem => {
                     Object.values(categoryItem).forEach(itemValue=> {
                         Object.values(itemValue).forEach(item => {
-                            console.log(item.id)
                             newArr.push({
                                 attrs: [],
                                 extra: {},
@@ -226,10 +224,8 @@
                         })
                     })
                 })
-
                 //检验订单是否满足条件
                 this.checkoutData = await checkout(this.geohash, [newArr], this.shopId);
-                                console.log(this.checkoutData )
                 this.SAVE_CART_ID_SIG({cart_id: this.checkoutData.cart.id, sig:  this.checkoutData.sig})
                 this.initAddress();
                 this.showLoading = false;
