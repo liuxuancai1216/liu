@@ -329,6 +329,8 @@
         data(){
             return{
                 geohash: '', //geohash位置信息
+                geohash1:"", //经度
+                geohash2:"", //纬度
                 shopId: null, //商店id值
                 showLoading: true, //显示加载动画
                 changeShowType: 'food',//切换显示商品或者评价
@@ -367,8 +369,13 @@
         },
         created(){
             this.geohash = this.$route.query.geohash;
+            // this.geohash1 = this.geohash.split(',')[0];
+            // this.geohash2 = this.geohash.split(',')[1];
+            // console.log(this.geohash1+"----"+this.geohash2)
             this.shopId = this.$route.query.id;
+            console.log(this.shopId)
             this.INIT_BUYCART();
+           
         },
         mounted(){
             this.initData();

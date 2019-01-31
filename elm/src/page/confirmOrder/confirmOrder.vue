@@ -156,19 +156,22 @@
         },
         created(){
             //获取上个页面传递过来的geohash值
-            console.log(this.$route)
-            this.geohash = this.$route.query.geohash;
+            console.log(this.$route.query)
+            this.geohash = this.$route.query.geohash
+            // console.log(this.geohash)
             //获取上个页面传递过来的shopid值
             this.shopId = this.$route.query.shopId;
+            console.log(this.shopId)
             this.INIT_BUYCART();
             this.SAVE_SHOPID(this.shopId);
             //获取当前商铺购物车信息
             this.shopCart = this.cartList[this.shopId];
+            console.log(this.shopCart)
         },
         mounted(){
             if (this.geohash) {
-                this.initData();
-                this.SAVE_GEOHASH(this.geohash);
+                // this.initData();
+                // this.SAVE_GEOHASH(this.geohash);
             }
             if (!(this.userInfo && this.userInfo.user_id)) {
                 // this.showAlert = true;
@@ -229,7 +232,7 @@
 
                 //检验订单是否满足条件
                 this.checkoutData = await checkout(this.geohash, [newArr], this.shopId);
-                                console.log(this.checkoutData )
+                console.log( this.checkoutData )
                 this.SAVE_CART_ID_SIG({cart_id: this.checkoutData.cart.id, sig:  this.checkoutData.sig})
                 this.initAddress();
                 this.showLoading = false;

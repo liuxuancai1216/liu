@@ -24,6 +24,17 @@ const useCart = r => require.ensure([], () => r(require('../page/vipcard/childre
 const vipDescription = r => require.ensure([], () => r(require('../page/vipcard/children/vipDescription')), 'vipDescription')
 const service = r => require.ensure([], () => r(require('../page/service/service')), 'service')
 const questionDetail = r => require.ensure([], () => r(require('../page/service/children/questionDetail')), 'questionDetail')
+const download = r => require.ensure([], () => r(require('../page/download/download')), 'download')
+const balance = r => require.ensure([], () => r(require('../page/balance/balance')), 'balance')
+const balanceDetail = r => require.ensure([], () => r(require('../page/balance/children/detail')), 'balanceDetail')
+const benefit = r => require.ensure([], () => r(require('../page/benefit/benefit')), 'benefit')
+const hbDescription = r => require.ensure([], ()=> r (require('../page/benefit/children/hbDescription')), 'hbDescription') 
+const hbHistory = r => require.ensure([], ()=> r (require('../page/benefit/children/hbHistory')), 'hbHistory')
+const exchange = r => require.ensure([], ()=> r (require('../page/benefit/children/exchange')), 'exchange')
+const coupon = r => require.ensure([], ()=> r (require('../page/benefit/children/coupon')), 'coupon')
+const commend = r => require.ensure([], ()=> r (require('../page/benefit/children/commend')), 'commend')
+const points = r => require.ensure([], () => r(require('../page/points/points')), 'points')
+const pointsDetail = r => require.ensure([], () => r(require('../page/points/children/detail')), 'pointsDetail')
 export default [{
     path: '/',
     component: App, //顶层路由，对应index.html
@@ -137,6 +148,50 @@ export default [{
              children: [{
                 path: 'questionDetail', //订单详情页
                 component: questionDetail,
+            }, ]
+        },
+         //余额
+         {
+            path: 'balance',
+            component: balance,
+            children: [{
+                path: 'detail', //余额说明
+                component: balanceDetail,
+            }, ]
+        },
+         //我的优惠页
+        {
+            path: 'benefit',
+            component: benefit,
+            children:[{
+                path: 'hbDescription',    //红包说明
+                component: hbDescription,
+            },{
+                path: 'hbHistory',       //历史红包
+                component: hbHistory,
+            },{
+                path: 'exchange',         //兑换红包
+                component: exchange,
+            },{
+                path:'commend',            //推荐有奖
+                component: commend, 
+            },{
+                path: 'coupon',             //代金说明
+                component: coupon
+            }]
+        },
+          //下载页
+        {
+            path: '/download',
+            component: download
+        },
+        //我的积分页
+        {
+            path: 'points',
+            component: points,
+            children: [{
+                path: 'detail', //积分说明
+                component: pointsDetail,
             }, ]
         },
     ]
