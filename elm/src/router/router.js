@@ -9,6 +9,8 @@ const login = r => require.ensure([], () => r(require('../page/login/login')), '
 const info = r => require.ensure([], () => r(require('../page/profile/children/info')), 'info')
 const setusername = r => require.ensure([], () => r(require('../page/profile/children/children/setusername')), 'setusername')
 const address = r => require.ensure([], () => r(require('../page/profile/children/children/address')), 'address')
+const add = r => require.ensure([], () => r(require('../page/profile/children/children/children/add')), 'add')
+const addDetail = r => require.ensure([], () => r(require('../page/profile/children/children/children/children/addDetail')), 'addDetail')
 const shop = r => require.ensure([], () => r(require('../page/shop/shop')), 'shop')
 const foodDetail = r => require.ensure([], () => r(require('../page/shop/children/foodDetail')), 'foodDetail')
 const shopDetail = r => require.ensure([], () => r(require('../page/shop/children/shopDetail')), 'shopDetail')
@@ -35,6 +37,7 @@ const coupon = r => require.ensure([], ()=> r (require('../page/benefit/children
 const commend = r => require.ensure([], ()=> r (require('../page/benefit/children/commend')), 'commend')
 const points = r => require.ensure([], () => r(require('../page/points/points')), 'points')
 const pointsDetail = r => require.ensure([], () => r(require('../page/points/children/detail')), 'pointsDetail')
+const forget = r => require.ensure([], () => r(require('../page/forget/forget')),'forget')
 export default [{
     path: '/',
     component: App, //顶层路由，对应index.html
@@ -75,6 +78,10 @@ export default [{
             path: '/login',
             component: login
         },
+        {
+            path: 'forget', //修改密码页
+            component: forget
+        },
          //商铺详情页
          {
             path: '/shop',
@@ -104,6 +111,14 @@ export default [{
                 },{
                     path: 'address',
                     component: address,     //编辑地址
+                    children:[{
+                        path:'add',
+                        component:add,
+                        children:[{
+                            path:'addDetail',
+                            component:addDetail
+                        }]
+                    }]
                 }]
             }]
         },
